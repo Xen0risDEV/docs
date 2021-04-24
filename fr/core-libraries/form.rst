@@ -31,14 +31,14 @@ exemple, un simple formulaire de contact ressemblerait à ceci::
     class ContactForm extends Form
     {
 
-        protected function _buildSchema(Schema $schema)
+        protected function _buildSchema(Schema $schema): Schema
         {
             return $schema->addField('name', 'string')
                 ->addField('email', ['type' => 'string'])
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function _buildValidator(Validator $validator)
+        protected function validationDefault(Validator $validator): Validator
         {
             return $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
@@ -49,7 +49,7 @@ exemple, un simple formulaire de contact ressemblerait à ceci::
                 ]);
         }
 
-        protected function _execute(array $data)
+        protected function _execute(array $data): bool
         {
             // Envoie un email.
             return true;
